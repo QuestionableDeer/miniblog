@@ -4,9 +4,9 @@
 <h1>{{ blogpost.title }}</h1>
 
 <p><strong>Post date</strong> {{ blogpost.post_date }}</p>
-<p><strong>Author:</strong> <a href="">{{ blogpost.author }}</a></p>
+<p><strong>Author:</strong> <a href="{{ blogpost.author.get_absolute_url }}">{{ blogpost.author }}</a></p>
 <p><strong>Description:</strong></p>
-<p>{{ blogpost.description }}</p>
+<p>{{ blogpost.description|linebreaks }}</p>
 
 <div style="margin-left:20px;margin-top:20px">
 	<h4>Comments</h4>
@@ -14,7 +14,7 @@
 		{% for comment in blogpost.comment_set.all %}
 			<hr />
 			<p>
-				{{ comment.author }} ({{ comment.post_date }}) - {{ comment.description }}
+				{{ comment.author }} ({{ comment.post_date }}) {{ comment.description|linebreaks }}
 			</p>
 		{% endfor %}
 	{% else %}

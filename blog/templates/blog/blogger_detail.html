@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Blogger: {{ blogger.user_name }}</h1>
+
+<h4>Bio</h4>
+<p>{{ blogger.bio|linebreaks }}</p>
+
+<div style="margin-left:20px;margin-top:20px">
+	<h4>Blogs list</h4>
+	{% if blogger.blogpost_set %}
+	<ul>
+		{% for blogpost in blogger.blogpost_set.all %}
+		<li><a href="{{ blogpost.get_absolute_url }}">{{ blogpost.title }}</a> ({{ blogpost.post_date }})</li>
+		{% endfor %}
+	</ul>
+	{% else %}
+		Author has not contributed any blog posts yet.
+	{% endif %}
+</div>
+
+{% endblock %}
